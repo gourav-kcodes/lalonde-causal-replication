@@ -6,17 +6,7 @@ from sklearn.preprocessing import StandardScaler
 
 
 def estimate_propensity(df: pd.DataFrame, covariates: list, treatment_col: str) -> pd.Series:
-    """Logistic regression propensity model. Simple on purpose - for this
-    sample size a flexible model (e.g. gradient boosting) tends to overfit
-    and produce scores near 0 or 1, which destroys common support.
-
-    Covariates here mix raw dollar amounts (earnings, in the thousands)
-    with 0/1 flags, so they're standardized first — without that, lbfgs
-    doesn't converge cleanly and the dollar-valued features end up
-    dominating the fit just because of their scale, not their actual
-    relevance.
-    """
-    X = StandardScaler().fit_transform(df[covariates].values)
+     X = StandardScaler().fit_transform(df[covariates].values)
     y = df[treatment_col].values
     model = LogisticRegression(max_iter=1000)
     model.fit(X, y)

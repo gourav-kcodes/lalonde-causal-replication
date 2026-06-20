@@ -1,9 +1,3 @@
-"""
-Sanity checks using synthetic data with a known, hand-built treatment
-effect. If an estimator can't recover a treatment effect we built into
-the data ourselves, it has no business being trusted on real data.
-"""
-
 import numpy as np
 import pandas as pd
 import pytest

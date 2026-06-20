@@ -1,7 +1,7 @@
 # Does Job Training Actually Increase Earnings? A Causal Inference Replication
 
 A from-scratch implementation of propensity score matching, inverse probability
-weighting, and doubly robust (AIPW) estimation — benchmarked against ground
+weighting, and doubly robust (AIPW) estimation - benchmarked against ground
 truth from a real randomized experiment.
 
 ## The question
@@ -17,7 +17,7 @@ a randomized control group?** In practice, most program evaluations don't.
 He replaced the experimental control group with a much larger, non-randomized
 comparison group drawn from the Current Population Survey (CPS), and checked
 whether standard econometric techniques of the time could still recover the
-true effect. They mostly couldn't — which became one of the most-cited
+true effect. They mostly couldn't - which became one of the most-cited
 results in the causal inference literature, and the reason this exact dataset
 is still the standard benchmark for any new causal estimator.
 
@@ -37,16 +37,16 @@ matching, inverse probability weighting (IPW), and augmented IPW
 
 ![Causal estimates vs. the true experimental benchmark](results/figures/results_comparison.png)
 
-The naive comparison doesn't just miss the true effect — it gets the **sign
-wrong**, implying training cost people over $8,000 a year. That's a textbook
+The naive comparison doesn't just miss the true effect - it gets the sign
+wrong, implying training cost people over $8,000 a year. That's a textbook
 case of confounding: the CPS comparison group is older, far more educated,
 much higher-earning before the program even started, and overwhelmingly less
 likely to be Black than the people who actually went through job training
 (full numbers below). None of those differences are caused by the training
 program, but a naive comparison can't tell the difference.
 
-All three causal methods land within roughly $500–$600 of the true effect and
-get the sign right. None of them recover the experimental benchmark exactly —
+All three causal methods land within roughly $500-$600 of the true effect and
+get the sign right. None of them recover the experimental benchmark exactly -
 which is itself an honest and expected result. The point of this project
 isn't to claim these methods are perfect; it's to show, with a verifiable
 ground truth, how much closer they get than a naive comparison, and to be
@@ -65,7 +65,7 @@ specific about where they still fall short (see [Limitations](#limitations)).
 | Earnings in 1975 | $1,532 | $13,651 |
 
 These are two very different populations. The CPS group was already earning
-roughly 7x more than the treated group *before* the program started. Without
+roughly 7x more than the treated group before the program started. Without
 adjusting for that, "job training increases earnings" and "people who were
 already higher earners didn't need job training" are indistinguishable from
 the data alone.
@@ -80,23 +80,23 @@ propensity score looked equally likely to end up treated, so comparing their
 outcomes approximates a randomized comparison.
 
 **Inverse probability weighting (IPW)** takes a different approach to the
-same problem — instead of discarding unmatched units, it reweights everyone
+same problem - instead of discarding unmatched units, it reweights everyone
 in the comparison group by how "treatment-like" they looked, so a
 control-group member who closely resembled a treated person counts more.
 
 **Doubly robust estimation (AIPW)** combines both: an outcome regression
 model and the propensity weights. It stays valid if *either* model is roughly
-right, not just one — which is what "doubly robust" refers to.
+right, not just one - which is what "doubly robust" refers to.
 
 All three are implemented from scratch in `src/` (`sklearn` is only used for
 the underlying logistic/linear regression fits, not for the causal logic
-itself). Confidence intervals come from a 200–500 iteration bootstrap.
+itself). Confidence intervals come from a 200-500 iteration bootstrap.
 
 ### Covariate balance before and after matching
 
 ![Covariate balance before and after matching](results/figures/love_plot.png)
 
-Before matching, every covariate is badly imbalanced — Black status alone has
+Before matching, every covariate is badly imbalanced - Black status alone has
 a standardized mean difference (SMD) of 2.43, more than 20x the usual
 "acceptable" threshold of 0.1. After matching, every covariate falls inside
 or close to that ±0.1 band. This is the actual mechanism behind why the
@@ -111,9 +111,9 @@ treated group on every observed characteristic.
   wider range (see `results/figures/propensity_overlap.png`). Trimming to
   common support drops roughly two-thirds of the comparison pool before any
   matching happens. This is a known, structural feature of this dataset, not
-  a bug in the implementation — and it's exactly why the bootstrap confidence
+  a bug in the implementation - and it's exactly why the bootstrap confidence
   intervals are wide enough to include zero for two of the three methods.
-- **All three methods assume no unobserved confounding** — that earnings
+- **All three methods assume no unobserved confounding** - that earnings
   differences are fully explained by the covariates collected (age,
   education, race, marital status, prior earnings). If something
   unmeasured (e.g. motivation, local job market) affects both treatment

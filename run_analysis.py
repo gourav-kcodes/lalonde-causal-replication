@@ -1,13 +1,3 @@
-"""
-End-to-end run: loads the data, computes the true experimental benchmark,
-then estimates the same effect four different ways from the observational
-(non-experimental) sample — naive, matching, IPW, and doubly robust — and
-checks which ones actually get close to the truth.
-
-Run from the project root:
-    python run_analysis.py
-"""
-
 import json
 import pandas as pd
 

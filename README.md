@@ -12,8 +12,8 @@ their earnings. Because assignment was randomized, a simple difference in
 average earnings between the two groups is an unbiased estimate of the
 training program's effect.
 
-LaLonde (1986) asked a different question: **what happens if you don't have
-a randomized control group?** In practice, most program evaluations don't.
+LaLonde (1986) asked a different question: what happens if you don't have
+a randomized control group? In practice, most program evaluations don't.
 He replaced the experimental control group with a much larger, non-randomized
 comparison group drawn from the Current Population Survey (CPS), and checked
 whether standard econometric techniques of the time could still recover the
@@ -29,8 +29,8 @@ matching, inverse probability weighting (IPW), and augmented IPW
 
 | Method | Estimated ATT | 95% CI |
 |---|---|---|
-| **True effect (randomized experiment)** | **$1,794** | — |
-| Naive difference in means | **−$8,498** | (−9,555, −7,356) |
+| True effect (randomized experiment) | $1,794 | — |
+| Naive difference in means | −$8,498 | (−9,555, −7,356) |
 | Propensity score matching | $1,725 | (−352, 3,250) |
 | Inverse probability weighting | $1,192 | (−111, 2,739) |
 | Doubly robust (AIPW) | $1,300 | (36, 2,886) |

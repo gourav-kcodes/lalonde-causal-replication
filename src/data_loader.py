@@ -1,17 +1,3 @@
-"""
-Data loading for the LaLonde (1986) causal inference replication.
-
-Two comparison groups are used against the same treated group (NSW job
-trainees), which is the whole point of the design:
-
-1. Experimental control (NSW): randomized, gives the "true" benchmark ATT.
-2. Observational control (CPS-1): a large non-experimental comparison group,
-   used to simulate what an analyst sees when there's no randomization.
-
-Source: Dehejia & Wahba (1999) reformatted data, distributed via the
-`causaldata` package (Cunningham, "Causal Inference: The Mixtape").
-"""
-
 import pandas as pd
 from causaldata import nsw_mixtape, cps_mixtape
 
@@ -28,9 +14,6 @@ def load_experimental() -> pd.DataFrame:
 
 
 def load_observational() -> pd.DataFrame:
-    """NSW treated + CPS-1 non-experimental comparison group. This is the
-    dataset an analyst would actually have in a real observational study —
-    no randomization, so confounding is a live problem."""
     nsw = nsw_mixtape.load_pandas().data
     cps = cps_mixtape.load_pandas().data
 

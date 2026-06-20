@@ -29,10 +29,10 @@ matching, inverse probability weighting (IPW), and augmented IPW
 
 | Method | Estimated ATT | 95% CI |
 |---|---|---|
-| True effect (randomized experiment) | $1,794 | — |
-| Naive difference in means | −$8,498 | (−9,555, −7,356) |
-| Propensity score matching | $1,725 | (−352, 3,250) |
-| Inverse probability weighting | $1,192 | (−111, 2,739) |
+| True effect (randomized experiment) | $1,794 | - |
+| Naive difference in means | -$8,498 | (-9,555, -7,356) |
+| Propensity score matching | $1,725 | (-352, 3,250) |
+| Inverse probability weighting | $1,192 | (-111, 2,739) |
 | Doubly robust (AIPW) | $1,300 | (36, 2,886) |
 
 ![Causal estimates vs. the true experimental benchmark](results/figures/results_comparison.png)
@@ -106,7 +106,7 @@ treated group on every observed characteristic.
 
 ## Limitations
 
-- **Common support is thin.** Most of the CPS sample has a near-zero
+- **Common support is thin** - Most of the CPS sample has a near-zero
   estimated probability of treatment, while the treated group spans a much
   wider range (see `results/figures/propensity_overlap.png`). Trimming to
   common support drops roughly two-thirds of the comparison pool before any
@@ -119,18 +119,18 @@ treated group on every observed characteristic.
   unmeasured (e.g. motivation, local job market) affects both treatment
   and outcome, every method here, including AIPW, is biased in the same
   direction.
-- **The propensity model is a plain logistic regression.** A more flexible
+- **The propensity model is a plain logistic regression** - A more flexible
   model could fit the treatment assignment mechanism better, but on a sample
   this size (445 treated + control vs. ~16,000 non-experimental controls) it
   also risks pushing scores toward 0/1 and destroying common support
-  entirely — which is why a simple model was chosen deliberately, not by
+  entirely - which is why a simple model was chosen deliberately, not by
   default.
 
 ## Project structure
 
 ```
 causal-lalonde/
-├── run_analysis.py        # end-to-end pipeline — run this
+├── run_analysis.py        # end-to-end pipeline - run this
 ├── src/
 │   ├── data_loader.py      # loads the NSW + CPS data
 │   ├── balance.py          # covariate balance diagnostics (SMD)

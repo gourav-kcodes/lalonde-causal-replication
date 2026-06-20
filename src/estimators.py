@@ -1,6 +1,4 @@
 """
-Causal effect estimators.
-
 Three estimators of the Average Treatment Effect on the Treated (ATT),
 in increasing order of sophistication:
 
@@ -8,9 +6,8 @@ in increasing order of sophistication:
 - IPW: reweights controls by their odds of being treated, so a control
   that looked like a likely treatment candidate counts more.
 - AIPW (augmented IPW / doubly robust): combines IPW with an outcome
-  regression model. It stays consistent if *either* the propensity
-  model or the outcome model is correctly specified, not just one —
-  hence "doubly robust".
+  regression model. It stays consistent if either the propensity
+  model or the outcome model is correctly specified, not just one
 """
 
 import numpy as np
@@ -42,18 +39,7 @@ def ipw_att(df: pd.DataFrame, pscore: pd.Series, treatment_col: str, outcome_col
 def doubly_robust_att(
     df: pd.DataFrame, pscore: pd.Series, covariates: list, treatment_col: str, outcome_col: str
 ) -> float:
-    """AIPW estimator for the ATT (Lunceford & Davidian, 2004).
-
-    Fits an outcome model on the control group only, to predict what each
-    unit's earnings would have been *without* training — including for
-    treated units, where that's the missing counterfactual. The first term
-    below is the average gap between treated units' real outcomes and that
-    counterfactual; the second term corrects for any remaining imbalance by
-    reweighting control residuals with the IPW weight. If either the outcome
-    model or the propensity model is roughly right, the estimate stays
-    consistent — that's the "doubly robust" part.
-    """
-    treat = df[treatment_col].values
+       treat = df[treatment_col].values
     y = df[outcome_col].values
     X = df[covariates].values
     ps = pscore.loc[df.index].values

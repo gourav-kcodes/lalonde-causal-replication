@@ -1,3 +1,6 @@
+#Covariate balance diagnostics
+
+
 import numpy as np
 import pandas as pd
 
@@ -37,12 +40,8 @@ def balance_table(
 
 
 """
-Covariate balance diagnostics.
-
 The standardized mean difference (SMD) is the standard way to check whether
 treated and control groups look alike on observed covariates. As a rule of
-thumb, |SMD| < 0.1 is considered well balanced; the naive observational
-comparison in this project blows way past that, which is the whole problem
-propensity score methods are trying to fix.
+thumb, |SMD| < 0.1 is considered well balanced.
 """
 

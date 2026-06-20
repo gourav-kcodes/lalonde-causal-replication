@@ -1,13 +1,3 @@
-"""
-Propensity score estimation and nearest-neighbor matching.
-
-The propensity score is P(treated | covariates). Two units with similar
-propensity scores looked similarly likely to end up treated, so matching on
-the score (rather than on every raw covariate) is a practical way to build
-a comparable control group out of the much larger, much-less-similar CPS
-sample.
-"""
-
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -16,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 
 
 def estimate_propensity(df: pd.DataFrame, covariates: list, treatment_col: str) -> pd.Series:
-    """Logistic regression propensity model. Simple on purpose — for this
+    """Logistic regression propensity model. Simple on purpose - for this
     sample size a flexible model (e.g. gradient boosting) tends to overfit
     and produce scores near 0 or 1, which destroys common support.
 

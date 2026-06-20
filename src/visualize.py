@@ -1,8 +1,3 @@
-"""
-Plots for the writeup: covariate balance (love plot), propensity score
-overlap, and a final results comparison chart.
-"""
-
 import matplotlib.pyplot as plt
 import pandas as pd
 
